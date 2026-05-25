@@ -1,13 +1,24 @@
 import { NavLink, useLocation } from "react-router-dom";
 import {
+  Bell,
   BarChart3,
+  BookOpen,
+  CalendarCheck,
+  CalendarDays,
+  ClipboardCheck,
+  CreditCard,
+  FileText,
   GraduationCap,
   LayoutDashboard,
+  LogOut,
   Menu,
   Moon,
+  Settings,
   Search,
   Sun,
+  UserRound,
   Users,
+  UsersRound,
   X
 } from "lucide-react";
 import { useState } from "react";
@@ -15,16 +26,40 @@ import { useState } from "react";
 const navItems = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard },
   { to: "/students", label: "Students", icon: Users },
-  { to: "/charts", label: "Charts", icon: BarChart3 }
+  { to: "/teachers", label: "Teachers", icon: GraduationCap },
+  { to: "/attendance", label: "Attendance", icon: CalendarCheck },
+  { to: "/fees", label: "Fees", icon: CreditCard },
+  { to: "/results", label: "Results", icon: FileText },
+  { to: "/timetable", label: "Timetable", icon: CalendarDays },
+  { to: "/notices", label: "Notices", icon: Bell },
+  { to: "/reports", label: "Reports", icon: ClipboardCheck },
+  { to: "/guardians", label: "Guardians", icon: UsersRound },
+  { to: "/admissions", label: "Admissions", icon: ClipboardCheck },
+  { to: "/library", label: "Library", icon: BookOpen },
+  { to: "/charts", label: "Charts", icon: BarChart3 },
+  { to: "/profile", label: "Profile", icon: UserRound },
+  { to: "/settings", label: "Settings", icon: Settings }
 ];
 
 const titles = {
   "/": "Dashboard",
   "/students": "Student Management",
-  "/charts": "Charts"
+  "/teachers": "Teachers",
+  "/attendance": "Attendance",
+  "/fees": "Fees",
+  "/results": "Exam Results",
+  "/timetable": "Timetable",
+  "/notices": "Notice Board",
+  "/reports": "Reports",
+  "/guardians": "Parents & Guardians",
+  "/admissions": "Admissions",
+  "/library": "Library",
+  "/charts": "Charts",
+  "/profile": "Profile",
+  "/settings": "Settings"
 };
 
-export default function AppShell({ children, darkMode, onToggleTheme }) {
+export default function AppShell({ children, darkMode, onToggleTheme, onLogout }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
 
@@ -58,7 +93,7 @@ export default function AppShell({ children, darkMode, onToggleTheme }) {
           </button>
         </div>
 
-        <nav className="flex-1 space-y-1 px-3">
+        <nav className="flex-1 space-y-1 overflow-y-auto px-3 pb-3">
           {navItems.map((item) => {
             const Icon = item.icon;
             return (
@@ -107,6 +142,9 @@ export default function AppShell({ children, darkMode, onToggleTheme }) {
             </div>
             <button className="icon-button" onClick={onToggleTheme} aria-label="Toggle dark mode">
               {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+            <button className="icon-button" onClick={onLogout} aria-label="Logout">
+              <LogOut size={18} />
             </button>
           </div>
         </header>
